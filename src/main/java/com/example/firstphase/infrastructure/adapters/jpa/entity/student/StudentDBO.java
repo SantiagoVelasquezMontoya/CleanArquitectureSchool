@@ -2,9 +2,7 @@ package com.example.firstphase.infrastructure.adapters.jpa.entity.student;
 
 import com.example.firstphase.domain.model.student.*;
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -17,6 +15,7 @@ import lombok.*;
 public class StudentDBO {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

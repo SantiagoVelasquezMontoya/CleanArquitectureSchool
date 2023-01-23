@@ -34,13 +34,16 @@ public class StudentDTO {
         this.phone = studentDBO.getPhone();
     }
 
-    public Student toStudent(StudentDTO studentDTO){
+    public static Student toStudent(StudentDTO studentDTO){
         return new Student(
                 new StudentId(studentDTO.getId()),
                 new StudentName(studentDTO.getName()),
                 new StudentPhone(studentDTO.getPhone()),
                 new StudentEmail(studentDTO.getEmail())
         );
+    }
+
+    public StudentDTO() {
     }
 
     public Integer getId() {
