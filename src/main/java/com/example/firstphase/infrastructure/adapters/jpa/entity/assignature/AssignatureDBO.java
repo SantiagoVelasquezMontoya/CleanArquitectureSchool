@@ -32,7 +32,7 @@ public class AssignatureDBO {
     private Long id;
     private String name;
 
-    @OneToMany(orphanRemoval = false)
+    @OneToMany
     @Column(insertable = false,  updatable = false)
     @JsonIgnore
     @JsonManagedReference

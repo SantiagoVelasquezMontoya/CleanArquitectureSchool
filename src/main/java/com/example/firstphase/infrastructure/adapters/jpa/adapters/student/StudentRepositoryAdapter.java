@@ -46,19 +46,15 @@ public class StudentRepositoryAdapter implements StudentRepository {
 //        if(foundAssignature.isEmpty()) return "This Assignature Doesn't Exist";
 //        Optional<StudentDBO> savedStudent = Optional.of(studentAdapterRepository.save(new StudentDBO(student)));
 //        return "Student was enrolled";
-
-
-
         Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository.
                 findById(Math.toIntExact(student.getAssignature().getId().getValue()));
         if(foundAssignature.isEmpty()){
-         return "No existe Asignatura";
+         return "This Assignature does not exist";
         }
         studentAdapterRepository.save(new StudentDBO(student));
-        return "Creado";
+        return "The student was saved and enrolled in the assignature successfully.";
 
     }
-
 
     @Override
     public List<Student> getEnrolledStudents(Integer assignatureId) {
@@ -73,5 +69,20 @@ public class StudentRepositoryAdapter implements StudentRepository {
         if(foundStudent.isEmpty()) return "This Student Doesn't Exist";
         studentAdapterRepository.delete(foundStudent.get());
         return "The Student Was Succesfully Deleted";
+    }
+
+    @Override
+    public Student getStudent(Integer studentId) {
+        Optional<StudentDBO> foundStudent = studentAdapterRepository.
+                findById(Math.toIntExact(studentId));
+        return foundStudent.map(StudentDBO::toStudent).orElse(null);
+    }
+
+    @Override
+    public List<Student> getAllEnrolledStudents() {
+        List<StudentDBO> studentDBOList = (List<StudentDBO>) studentAdapterRepository.findAll();
+        return  studentDBOList.stream().filter(student -> {
+            return student.getAssignatureDBO() != null;
+        }).map(StudentDBO::toStudent).collect(Collectors.toList());
     }
 }

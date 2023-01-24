@@ -39,4 +39,13 @@ public class StudentUseCase {
         return studentRepository.deleteStudent(StudentDTO.toStudent(studentDTO));
     }
 
+    public StudentDTO getStudent(Integer studentid){
+        return new StudentDTO(studentRepository.getStudent(studentid));
+    }
+
+    public List<StudentDTO> getAllEnrolledStudents(){
+        return studentRepository.getAllEnrolledStudents()
+                .stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
 }

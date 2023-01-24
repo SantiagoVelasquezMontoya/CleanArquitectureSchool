@@ -11,4 +11,6 @@ public interface AssignatureRepository {
 
     public List<Assignature> getAssignatures();
 
+    public Assignature getAssignature(Integer assignatureId);
+
 }

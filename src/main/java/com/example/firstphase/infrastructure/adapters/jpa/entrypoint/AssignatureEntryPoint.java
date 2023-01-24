@@ -37,4 +37,17 @@ public class AssignatureEntryPoint {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAssignature(@PathVariable(name = "id") Integer assignatureId){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(assignatureUseCase.getAssignature(assignatureId));
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+
+
 }

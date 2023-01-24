@@ -25,4 +25,8 @@ public class AssignatureUseCase {
     public List<AssignatureDTO> getAssignatures(){
         return assignatureRepository.getAssignatures().stream().map(AssignatureDTO::new).collect(Collectors.toList());
     }
+
+    public AssignatureDTO getAssignature(Integer assignatureId){
+        return new AssignatureDTO(assignatureRepository.getAssignature(assignatureId));
+    }
 }

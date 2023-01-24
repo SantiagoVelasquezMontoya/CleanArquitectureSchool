@@ -26,19 +26,11 @@ public class StudentDBO {
     private String email;
     private Integer phone;
 
-    @ManyToOne( cascade =  CascadeType.ALL)
+    @ManyToOne
     @JsonBackReference
     @JsonIgnore
     @JoinColumn(name = "assignature_id" )
     private AssignatureDBO assignatureDBO;
-
-//    public StudentDBO(Long id, String name, String email, Integer phone, AssignatureDBO assignatureDBO) {
-//        this.id = id;
-//        this.name = name;
-//        this.email = email;
-//        this.phone = phone;
-//        this.assignatureDBO = assignatureDBO;
-//    }
 
     public StudentDBO(Student student){
         this.id = student.getId().getValue();

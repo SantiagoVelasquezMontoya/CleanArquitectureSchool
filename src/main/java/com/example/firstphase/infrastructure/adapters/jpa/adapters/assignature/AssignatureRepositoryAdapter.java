@@ -7,6 +7,7 @@ import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.Ass
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -28,5 +29,11 @@ public class AssignatureRepositoryAdapter implements AssignatureRepository {
     public List<Assignature> getAssignatures() {
             List<AssignatureDBO> assignatureDBOList = (List<AssignatureDBO>) assignatureAdapterRepository.findAll();
         return assignatureDBOList.stream().map(AssignatureDBO::toAssignature).collect(Collectors.toList());
+    }
+
+    @Override
+    public Assignature getAssignature(Integer assignatureId) {
+        Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository.findById(assignatureId);
+        return foundAssignature.map(AssignatureDBO::toAssignature).orElse(null);
     }
 }
