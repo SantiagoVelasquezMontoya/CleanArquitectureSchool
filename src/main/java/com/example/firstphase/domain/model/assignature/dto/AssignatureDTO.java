@@ -30,6 +30,7 @@ public class AssignatureDTO {
     }
 
     public static Assignature toAssignature(AssignatureDTO assignatureDTO){
+        if(assignatureDTO != null){
         return new Assignature(
                 new AssignatureId(assignatureDTO.getId()),
                 new AssignatureName(assignatureDTO.getName()),
@@ -37,6 +38,8 @@ public class AssignatureDTO {
                      assignatureDTO.getStudentDTO().stream().map(StudentDTO::toStudent).collect(Collectors.toList())
                          : null
                 );
+        } else{
+        return null;        }
     }
 
 

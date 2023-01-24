@@ -26,8 +26,8 @@ public class StudentRepositoryAdapter implements StudentRepository {
     }
 
     @Override
-    public Student saveStudent(StudentDTO studentDTO) {
-        return StudentDBO.toStudent(studentAdapterRepository.save(new StudentDBO(studentDTO)));
+    public Student saveStudent(Student student) {
+        return StudentDBO.toStudent(studentAdapterRepository.save(new StudentDBO(student)));
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface StudentRepository {
 
-    public Student saveStudent(StudentDTO studentDTO);
+    public Student saveStudent(Student student);
 
     public List<Student> getStudents();
 

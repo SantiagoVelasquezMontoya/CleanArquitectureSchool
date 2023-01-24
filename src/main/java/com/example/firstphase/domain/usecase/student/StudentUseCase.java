@@ -18,7 +18,7 @@ public class StudentUseCase {
     }
 
     public StudentDTO saveStudent(StudentDTO studentDTO) {
-        StudentDBO studentDBO = new StudentDBO(studentRepository.saveStudent(studentDTO));
+        StudentDBO studentDBO = new StudentDBO(studentRepository.saveStudent(StudentDTO.toStudent(studentDTO)));
         return new StudentDTO(studentDBO);
     }
 
