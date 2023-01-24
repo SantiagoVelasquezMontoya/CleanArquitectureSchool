@@ -5,6 +5,7 @@ import com.example.firstphase.domain.model.assignature.AssignatureId;
 import com.example.firstphase.domain.model.assignature.AssignatureName;
 import com.example.firstphase.domain.model.student.*;
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
+import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.student.StudentDBO;
 
 public class AssignatureDTO {
@@ -16,12 +17,10 @@ public class AssignatureDTO {
         this.name = name;
     }
 
-//    public StudentDTO(StudentDBO studentDBO){
-//        this.id = studentDBO.getId();
-//        this.name = studentDBO.getName();
-//        this.email = studentDBO.getEmail();
-//        this.phone = studentDBO.getPhone();
-//    }
+    public AssignatureDTO(AssignatureDBO assignatureDBO){
+        this.id = assignatureDBO.getId();
+        this.name = assignatureDBO.getName();
+    }
 
     public static Assignature toAssignature(AssignatureDTO assignatureDTO){
         return new Assignature(
