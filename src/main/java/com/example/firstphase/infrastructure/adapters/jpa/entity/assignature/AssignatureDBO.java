@@ -10,6 +10,8 @@ import com.example.firstphase.infrastructure.adapters.jpa.entity.student.Student
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Builder
 @NoArgsConstructor
@@ -27,6 +29,9 @@ public class AssignatureDBO {
 
     private String name;
 
+    @OneToMany
+    private List<StudentDBO> studentDBO;
+
 
     public AssignatureDBO(AssignatureDTO assignatureDTO) {
         this.id = assignatureDTO.getId();
@@ -41,7 +46,8 @@ public class AssignatureDBO {
     public static Assignature toAssignature(AssignatureDBO assignatureDBO){
         return new Assignature(
                 new AssignatureId(assignatureDBO.getId()),
-                new AssignatureName(assignatureDBO.getName())
+                new AssignatureName(assignatureDBO.getName()),
+
         );
     }
 }
