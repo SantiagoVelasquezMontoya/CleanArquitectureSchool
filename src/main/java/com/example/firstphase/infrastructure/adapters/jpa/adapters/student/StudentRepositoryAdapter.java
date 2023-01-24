@@ -29,4 +29,16 @@ public class StudentRepositoryAdapter implements StudentRepository {
         List<StudentDBO> studentDBOList = (List<StudentDBO>) studentAdapterRepository.findAll();
         return studentDBOList.stream().map(StudentDBO::toStudent).collect(Collectors.toList());
     }
+
+    @Override
+    public String enrollStudent(StudentDTO studentDTO) {
+        StudentDBO savedStudent = studentAdapterRepository.save(new StudentDBO(studentDTO));
+        if(savedStudent != null){
+            return "Student was enrolled";
+        } else{
+            return "There was an Error";
+        }
+    }
+
+
 }

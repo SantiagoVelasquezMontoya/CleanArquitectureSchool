@@ -10,4 +10,6 @@ public interface StudentRepository {
     public Student saveStudent(StudentDTO studentDTO);
 
     public List<Student> getStudents();
+
+    public String enrollStudent(StudentDTO studentDTO);
 }

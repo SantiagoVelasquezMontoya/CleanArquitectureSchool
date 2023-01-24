@@ -23,8 +23,15 @@ public class StudentEntryPoint {
         return new StudentDTO(studentUseCase.saveStudent(studentDTO));
     }
 
+    @PostMapping("/enroll")
+    public ResponseEntity<?> enrollStudent (@RequestBody StudentDTO studentDTO){
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentUseCase.enrollStudent(studentDTO));
+    }
+
     @GetMapping
     public ResponseEntity<List<StudentDTO>> getStudents(){
         return  ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getStudents());
     }
+
+
 }
