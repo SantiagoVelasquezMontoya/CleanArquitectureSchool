@@ -38,14 +38,25 @@ public class StudentRepositoryAdapter implements StudentRepository {
 
     @Override
     public String enrollStudent(Student student) {
-        Optional<StudentDBO> foundStudent = studentAdapterRepository.
-                findById(Math.toIntExact(student.getId().getValue()));
-        Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository
-                .findById(Math.toIntExact(student.getAssignature().getId().getValue()));
-        if(foundStudent.isEmpty()) return "This Student Doesn't Exist";
-        if(foundAssignature.isEmpty()) return "This Assignature Doesn't Exist";
-        Optional<StudentDBO> savedStudent = Optional.of(studentAdapterRepository.save(new StudentDBO(student)));
-        return "Student was enrolled";
+//        Optional<StudentDBO> foundStudent = studentAdapterRepository.
+//                findById(Math.toIntExact(student.getId().getValue()));
+//        Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository
+//                .findById(Math.toIntExact(student.getAssignature().getId().getValue()));
+//        //if(foundStudent.isEmpty()) return "This Student Doesn't Exist";
+//        if(foundAssignature.isEmpty()) return "This Assignature Doesn't Exist";
+//        Optional<StudentDBO> savedStudent = Optional.of(studentAdapterRepository.save(new StudentDBO(student)));
+//        return "Student was enrolled";
+
+
+
+        Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository.
+                findById(Math.toIntExact(student.getAssignature().getId().getValue()));
+        if(foundAssignature.isEmpty()){
+         return "No existe Asignatura";
+        }
+        studentAdapterRepository.save(new StudentDBO(student));
+        return "Creado";
+
     }
 
 
