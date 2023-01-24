@@ -17,9 +17,9 @@ public class StudentUseCase {
         this.studentRepository = studentRepository;
     }
 
-    public StudentDBO saveStudent(StudentDTO studentDTO) {
+    public StudentDTO saveStudent(StudentDTO studentDTO) {
         StudentDBO studentDBO = new StudentDBO(studentRepository.saveStudent(studentDTO));
-        return studentDBO;
+        return new StudentDTO(studentDBO);
     }
 
     public List<StudentDTO> getStudents(){
@@ -31,5 +31,8 @@ public class StudentUseCase {
         return studentRepository.enrollStudent(studentDTO);
     }
 
+    public List<StudentDTO> getEnrolledStudents(Integer assignatureId){
+        return studentRepository.getEnrolledStudents(assignatureId).stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
 
 }

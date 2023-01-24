@@ -20,7 +20,7 @@ public class StudentEntryPoint {
 
     @PostMapping
     public StudentDTO saveStudent(@RequestBody StudentDTO studentDTO){
-        return new StudentDTO(studentUseCase.saveStudent(studentDTO));
+        return studentUseCase.saveStudent(studentDTO);
     }
 
     @PostMapping("/enroll")
@@ -31,6 +31,11 @@ public class StudentEntryPoint {
     @GetMapping
     public ResponseEntity<List<StudentDTO>> getStudents(){
         return  ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getStudents());
+    }
+
+    @GetMapping("/enrolled/{id}")
+    public ResponseEntity<?> getEnrolledStudents(@PathVariable(name = "id") Integer assignatureId){
+        return ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getEnrolledStudents(assignatureId));
     }
 
 

@@ -56,6 +56,7 @@ public class StudentDBO {
         this.id = studentDTO.getId();
         this.name = studentDTO.getName();
         this.email = studentDTO.getEmail();
+        this.phone = studentDTO.getPhone();
         if(studentDTO.getAssignatureDTO() != null){
             this.assignatureDBO = new AssignatureDBO(studentDTO.getAssignatureDTO());
         }

@@ -6,4 +6,5 @@ import com.example.firstphase.domain.model.assignature.dto.AssignatureDTO;
 public interface AssignatureRepository {
 
     public Assignature saveAssignature(AssignatureDTO assignatureDTO);
+
 }
