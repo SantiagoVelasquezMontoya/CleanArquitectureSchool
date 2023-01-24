@@ -9,6 +9,7 @@ import com.example.firstphase.infrastructure.adapters.jpa.entity.student.Student
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,9 @@ public class StudentRepositoryAdapter implements StudentRepository {
         Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository.
                 findById(Math.toIntExact(student.getAssignature().getId().getValue()));
         if(foundAssignature.isEmpty()){
-         return "This Assignature does not exist";
+            throw new NoSuchElementException(student.getAssignature().getName().getValue() +
+                    " Assignature Does not exist");
+
         }
         studentAdapterRepository.save(new StudentDBO(student));
         return "The student was saved and enrolled in the assignature successfully.";
