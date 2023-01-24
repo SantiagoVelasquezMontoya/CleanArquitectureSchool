@@ -28,8 +28,7 @@ public class StudentUseCase {
     }
 
     public String enrollStudent(StudentDTO studentDTO){
-        studentRepository.enrollStudent(studentDTO);
-        return "Sending Student";
+        return studentRepository.enrollStudent(studentDTO);
     }
 
 

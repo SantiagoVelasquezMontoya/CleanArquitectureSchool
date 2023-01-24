@@ -33,7 +33,7 @@ public class AssignatureDBO {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<StudentDBO> studentDBO;
 

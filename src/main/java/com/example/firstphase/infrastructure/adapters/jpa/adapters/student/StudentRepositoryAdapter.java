@@ -33,11 +33,7 @@ public class StudentRepositoryAdapter implements StudentRepository {
     @Override
     public String enrollStudent(StudentDTO studentDTO) {
         StudentDBO savedStudent = studentAdapterRepository.save(new StudentDBO(studentDTO));
-        if(savedStudent != null){
-            return "Student was enrolled";
-        } else{
-            return "There was an Error";
-        }
+        return "Student was enrolled";
     }
 
 
