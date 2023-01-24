@@ -37,13 +37,14 @@ public class StudentRepositoryAdapter implements StudentRepository {
     }
 
     @Override
-    public String enrollStudent(StudentDTO studentDTO) {
-        Optional<StudentDBO> foundStudent = studentAdapterRepository.findById(Math.toIntExact(studentDTO.getId()));
+    public String enrollStudent(Student student) {
+        Optional<StudentDBO> foundStudent = studentAdapterRepository.
+                findById(Math.toIntExact(student.getId().getValue()));
         Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository
-                .findById(Math.toIntExact(studentDTO.getAssignatureDTO().getId()));
-        if(foundAssignature.isEmpty()) return "This Assignature Doesn't Exist";
+                .findById(Math.toIntExact(student.getAssignature().getId().getValue()));
         if(foundStudent.isEmpty()) return "This Student Doesn't Exist";
-        Optional<StudentDBO> savedStudent = Optional.of(studentAdapterRepository.save(new StudentDBO(studentDTO)));
+        if(foundAssignature.isEmpty()) return "This Assignature Doesn't Exist";
+        Optional<StudentDBO> savedStudent = Optional.of(studentAdapterRepository.save(new StudentDBO(student)));
         return "Student was enrolled";
     }
 

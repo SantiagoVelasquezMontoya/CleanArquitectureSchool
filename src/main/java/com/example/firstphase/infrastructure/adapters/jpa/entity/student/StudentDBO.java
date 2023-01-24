@@ -14,11 +14,11 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name ="students")
+@Table(name ="student")
 public class StudentDBO {
 
     @Id
-    @Column(nullable = true)
+    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -26,13 +26,11 @@ public class StudentDBO {
     private String email;
     private Integer phone;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne( cascade =  CascadeType.ALL)
     @JsonBackReference
-    @JoinColumn(name = "assignature_dbo_id")
+    @JsonIgnore
+    @JoinColumn(name = "assignature_id" )
     private AssignatureDBO assignatureDBO;
-
-
-
 
 //    public StudentDBO(Long id, String name, String email, Integer phone, AssignatureDBO assignatureDBO) {
 //        this.id = id;
@@ -62,7 +60,10 @@ public class StudentDBO {
         }
     }
 
+
+
     public static Student toStudent(StudentDBO studentDBO){
+        if(studentDBO == null) return StudentDBO.toStudent(new StudentDBO());
         return new Student(
                 new StudentId(studentDBO.getId()),
                 new StudentName(studentDBO.getName()),
@@ -70,7 +71,7 @@ public class StudentDBO {
                 new StudentEmail(studentDBO.getEmail()),
                 studentDBO.getAssignatureDBO() != null ?
                         AssignatureDBO.toAssignature(studentDBO.getAssignatureDBO())
-                        : null
+                        : AssignatureDBO.toAssignature(new AssignatureDBO())
         );
     }
 

@@ -13,5 +13,5 @@ public interface StudentRepository {
 
     public List<Student> getEnrolledStudents(Integer assignatureId);
 
-    public String enrollStudent(StudentDTO studentDTO);
+    public String enrollStudent(Student student);
 }

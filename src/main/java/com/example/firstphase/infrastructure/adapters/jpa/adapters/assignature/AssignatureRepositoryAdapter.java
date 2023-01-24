@@ -6,6 +6,9 @@ import com.example.firstphase.domain.model.gateaways.AssignatureRepository;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 public class AssignatureRepositoryAdapter implements AssignatureRepository {
 
@@ -16,8 +19,14 @@ public class AssignatureRepositoryAdapter implements AssignatureRepository {
     }
 
     @Override
-    public Assignature saveAssignature(AssignatureDTO assignatureDTO) {
-        AssignatureDBO assignatureDBO = assignatureAdapterRepository.save(new AssignatureDBO(assignatureDTO));
+    public Assignature saveAssignature(Assignature assignature) {
+        AssignatureDBO assignatureDBO = assignatureAdapterRepository.save(new AssignatureDBO(assignature));
         return AssignatureDBO.toAssignature(assignatureDBO);
+    }
+
+    @Override
+    public List<Assignature> getAssignatures() {
+            List<AssignatureDBO> assignatureDBOList = (List<AssignatureDBO>) assignatureAdapterRepository.findAll();
+        return assignatureDBOList.stream().map(AssignatureDBO::toAssignature).collect(Collectors.toList());
     }
 }

@@ -19,23 +19,40 @@ public class StudentEntryPoint {
     public final StudentUseCase studentUseCase;
 
     @PostMapping
-    public StudentDTO saveStudent(@RequestBody StudentDTO studentDTO){
-        return studentUseCase.saveStudent(studentDTO);
+    public ResponseEntity<?> saveStudent(@RequestBody StudentDTO studentDTO){
+        try{
+            return ResponseEntity.status(HttpStatus.CREATED)
+                .body(studentUseCase.saveStudent(studentDTO));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PostMapping("/enroll")
     public ResponseEntity<?> enrollStudent (@RequestBody StudentDTO studentDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentUseCase.enrollStudent(studentDTO));
+        try{
+            return ResponseEntity.status(HttpStatus.CREATED).body(studentUseCase.enrollStudent(studentDTO));
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentDTO>> getStudents(){
-        return  ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getStudents());
+    public ResponseEntity<?> getStudents(){
+        try {
+            return  ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getStudents());
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/enrolled/{id}")
     public ResponseEntity<?> getEnrolledStudents(@PathVariable(name = "id") Integer assignatureId){
-        return ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getEnrolledStudents(assignatureId));
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getEnrolledStudents(assignatureId));
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 

@@ -28,7 +28,7 @@ public class StudentUseCase {
     }
 
     public String enrollStudent(StudentDTO studentDTO){
-        return studentRepository.enrollStudent(studentDTO);
+        return studentRepository.enrollStudent(StudentDTO.toStudent(studentDTO));
     }
 
     public List<StudentDTO> getEnrolledStudents(Integer assignatureId){

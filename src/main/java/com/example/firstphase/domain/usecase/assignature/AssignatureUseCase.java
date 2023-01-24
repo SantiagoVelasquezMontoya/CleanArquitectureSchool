@@ -6,6 +6,9 @@ import com.example.firstphase.domain.model.gateaways.AssignatureRepository;
 import com.example.firstphase.infrastructure.adapters.jpa.adapters.assignature.AssignatureAdapterRepository;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AssignatureUseCase {
 
     public final AssignatureRepository assignatureRepository;
@@ -16,8 +19,10 @@ public class AssignatureUseCase {
     }
 
     public AssignatureDBO saveAssignature(AssignatureDTO assignatureDTO){
-        AssignatureDBO assignatureDBO = new AssignatureDBO(assignatureRepository.saveAssignature(assignatureDTO));
+        AssignatureDBO assignatureDBO = new AssignatureDBO(assignatureRepository.saveAssignature(AssignatureDTO.toAssignature(assignatureDTO)));
         return assignatureDBO;
-
+    }
+    public List<AssignatureDTO> getAssignatures(){
+        return assignatureRepository.getAssignatures().stream().map(AssignatureDTO::new).collect(Collectors.toList());
     }
 }
