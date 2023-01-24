@@ -4,10 +4,12 @@ package com.example.firstphase.infrastructure.adapters.jpa.entrypoint;
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
 import com.example.firstphase.domain.usecase.student.StudentUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -19,5 +21,10 @@ public class StudentEntryPoint {
     @PostMapping
     public StudentDTO saveStudent(@RequestBody StudentDTO studentDTO){
         return new StudentDTO(studentUseCase.saveStudent(studentDTO));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StudentDTO>> getStudents(){
+        return  ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getStudents());
     }
 }

@@ -17,6 +17,8 @@ public class Assignature {
         this.student = student;
     }
 
+
+
     public AssignatureId getId() {
         return id;
     }

@@ -5,6 +5,9 @@ import com.example.firstphase.domain.model.student.Student;
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.student.StudentDBO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StudentUseCase {
 
     private final StudentRepository studentRepository;
@@ -17,6 +20,11 @@ public class StudentUseCase {
     public StudentDBO saveStudent(StudentDTO studentDTO) {
         StudentDBO studentDBO = new StudentDBO(studentRepository.saveStudent(studentDTO));
         return studentDBO;
+    }
+
+    public List<StudentDTO> getStudents(){
+        List<StudentDTO> studentDTOList = studentRepository.getStudents().stream().map(StudentDTO::new).collect(Collectors.toList());
+        return studentDTOList;
     }
 
 
