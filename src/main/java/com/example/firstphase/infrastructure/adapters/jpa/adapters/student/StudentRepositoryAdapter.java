@@ -54,4 +54,13 @@ public class StudentRepositoryAdapter implements StudentRepository {
         List<StudentDBO> studentDBOList = (List<StudentDBO>) studentAdapterRepository.findByAssignatureDBO_Id(assignatureId);
         return studentDBOList.stream().map(StudentDBO::toStudent).collect(Collectors.toList());
     }
+
+    @Override
+    public String deleteStudent(Student student) {
+        Optional<StudentDBO> foundStudent = studentAdapterRepository.
+                findById(Math.toIntExact(student.getId().getValue()));
+        if(foundStudent.isEmpty()) return "This Student Doesn't Exist";
+        studentAdapterRepository.delete(foundStudent.get());
+        return "The Student Was Succesfully Deleted";
+    }
 }

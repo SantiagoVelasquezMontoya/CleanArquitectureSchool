@@ -35,4 +35,8 @@ public class StudentUseCase {
         return studentRepository.getEnrolledStudents(assignatureId).stream().map(StudentDTO::new).collect(Collectors.toList());
     }
 
+    public String deleteStudent(StudentDTO studentDTO){
+        return studentRepository.deleteStudent(StudentDTO.toStudent(studentDTO));
+    }
+
 }

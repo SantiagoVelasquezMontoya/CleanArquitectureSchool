@@ -39,8 +39,11 @@ public class StudentEntryPoint {
 
     @GetMapping
     public ResponseEntity<?> getStudents(){
+        List<StudentDTO> studentDTOList = studentUseCase.getStudents();
         try {
-            return  ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getStudents());
+            if(studentDTOList.isEmpty()) return ResponseEntity.
+                    status(HttpStatus.NOT_FOUND).body(studentDTOList);
+            return  ResponseEntity.status(HttpStatus.OK).body(studentDTOList);
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -48,11 +51,21 @@ public class StudentEntryPoint {
 
     @GetMapping("/enrolled/{id}")
     public ResponseEntity<?> getEnrolledStudents(@PathVariable(name = "id") Integer assignatureId){
-        try{
+        List<StudentDTO> studentDTOList = studentUseCase.getEnrolledStudents(assignatureId);
+        if(studentDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(studentDTOList);
+        } else{
             return ResponseEntity.status(HttpStatus.OK).body(studentUseCase.getEnrolledStudents(assignatureId));
-        }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteStudent(@RequestBody StudentDTO studentDTO){
+     try{
+         return ResponseEntity.status(HttpStatus.OK).body(studentUseCase.deleteStudent(studentDTO));
+     } catch (Exception e){
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+     }
     }
 
 

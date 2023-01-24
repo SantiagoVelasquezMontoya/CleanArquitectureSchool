@@ -14,4 +14,6 @@ public interface StudentRepository {
     public List<Student> getEnrolledStudents(Integer assignatureId);
 
     public String enrollStudent(Student student);
+
+    public String deleteStudent(Student student);
 }

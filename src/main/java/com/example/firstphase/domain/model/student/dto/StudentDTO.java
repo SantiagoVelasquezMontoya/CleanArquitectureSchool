@@ -5,6 +5,7 @@ import com.example.firstphase.domain.model.assignature.dto.AssignatureDTO;
 import com.example.firstphase.domain.model.student.*;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.student.StudentDBO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class StudentDTO {
 

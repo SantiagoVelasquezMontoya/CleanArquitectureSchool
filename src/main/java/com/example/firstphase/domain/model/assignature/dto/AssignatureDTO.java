@@ -5,6 +5,7 @@ import com.example.firstphase.domain.model.assignature.AssignatureId;
 import com.example.firstphase.domain.model.assignature.AssignatureName;
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ public class AssignatureDTO {
     private Long id;
     private String name;
 
+    @JsonIgnore
     private List<StudentDTO> studentDTO;
 
     public AssignatureDTO(Long id, String name, List<StudentDTO> studentDTO) {
