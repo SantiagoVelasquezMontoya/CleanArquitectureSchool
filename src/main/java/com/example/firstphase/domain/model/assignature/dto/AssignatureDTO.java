@@ -9,10 +9,10 @@ import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.Ass
 import com.example.firstphase.infrastructure.adapters.jpa.entity.student.StudentDBO;
 
 public class AssignatureDTO {
-    private Integer id;
+    private Long id;
     private String name;
 
-    public AssignatureDTO(Integer id, String name) {
+    public AssignatureDTO(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -29,11 +29,11 @@ public class AssignatureDTO {
         );
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

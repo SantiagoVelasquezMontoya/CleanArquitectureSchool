@@ -2,13 +2,13 @@ package com.example.firstphase.domain.model.assignature;
 
 public class AssignatureId {
 
-    private final Integer value;
+    private final Long value;
 
-    public AssignatureId(Integer value) {
+    public AssignatureId(Long value) {
         this.value = value;
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return value;
     }
 }

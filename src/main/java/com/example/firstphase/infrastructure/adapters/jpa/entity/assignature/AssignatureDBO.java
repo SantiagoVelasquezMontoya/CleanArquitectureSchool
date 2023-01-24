@@ -20,8 +20,10 @@ import lombok.*;
 public class AssignatureDBO {
 
     @Id
+    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
 
     private String name;
 

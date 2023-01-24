@@ -2,14 +2,14 @@ package com.example.firstphase.domain.model.student;
 
 public class StudentId {
 
-    private final Integer value;
+    private final Long value;
 
 
-    public StudentId(Integer value) {
+    public StudentId(Long value) {
         this.value = value;
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return value;
     }
 }

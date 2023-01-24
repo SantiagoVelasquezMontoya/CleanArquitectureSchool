@@ -6,14 +6,14 @@ import com.example.firstphase.infrastructure.adapters.jpa.entity.student.Student
 public class StudentDTO {
 
 
-    private Integer id;
+    private Long id;
 
     private String name;
     private Integer phone;
 
     private String email;
 
-    public StudentDTO(Integer id, String name, Integer phone, String email) {
+    public StudentDTO(Long id, String name, Integer phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -46,11 +46,11 @@ public class StudentDTO {
     public StudentDTO() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
