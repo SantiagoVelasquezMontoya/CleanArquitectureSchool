@@ -3,6 +3,8 @@ package com.example.firstphase.infrastructure.adapters.jpa.entity.student;
 import com.example.firstphase.domain.model.student.*;
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +18,7 @@ import lombok.*;
 public class StudentDBO {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,7 +26,8 @@ public class StudentDBO {
     private String email;
     private Integer phone;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     @JoinColumn(name = "assignature_dbo_id")
     private AssignatureDBO assignatureDBO;
 
@@ -44,13 +47,18 @@ public class StudentDBO {
         this.name = student.getName().getValue();
         this.phone = student.getPhone().getValue();
         this.email = student.getEmail().getValue();
+        if(student.getAssignature() != null){
+            this.assignatureDBO = new AssignatureDBO(student.getAssignature());
+        }
     }
 
     public StudentDBO(StudentDTO studentDTO){
         this.id = studentDTO.getId();
         this.name = studentDTO.getName();
         this.email = studentDTO.getEmail();
-        this.assignatureDBO = new AssignatureDBO(studentDTO.getAssignatureDTO());
+        if(studentDTO.getAssignatureDTO() != null){
+            this.assignatureDBO = new AssignatureDBO(studentDTO.getAssignatureDTO());
+        }
     }
 
     public static Student toStudent(StudentDBO studentDBO){
@@ -59,7 +67,9 @@ public class StudentDBO {
                 new StudentName(studentDBO.getName()),
                 new StudentPhone(studentDBO.getPhone()),
                 new StudentEmail(studentDBO.getEmail()),
-                AssignatureDBO.toAssignature(studentDBO.getAssignatureDBO())
+                studentDBO.getAssignatureDBO() != null ?
+                        AssignatureDBO.toAssignature(studentDBO.getAssignatureDBO())
+                        : null
         );
     }
 

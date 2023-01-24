@@ -24,14 +24,18 @@ public class AssignatureDTO {
     public AssignatureDTO(AssignatureDBO assignatureDBO){
         this.id = assignatureDBO.getId();
         this.name = assignatureDBO.getName();
-        this.studentDTO = assignatureDBO.getStudentDBO().stream().map(StudentDTO::new).collect(Collectors.toList());
+        if(assignatureDBO.getStudentDBO() != null){
+            this.studentDTO = assignatureDBO.getStudentDBO().stream().map(StudentDTO::new).collect(Collectors.toList());
+        }
     }
 
     public static Assignature toAssignature(AssignatureDTO assignatureDTO){
         return new Assignature(
                 new AssignatureId(assignatureDTO.getId()),
                 new AssignatureName(assignatureDTO.getName()),
-                assignatureDTO.studentDTO.stream().map(StudentDTO::toStudent).collect(Collectors.toList())
+                 assignatureDTO.getStudentDTO() != null ?
+                     assignatureDTO.getStudentDTO().stream().map(StudentDTO::toStudent).collect(Collectors.toList())
+                         : null
                 );
     }
 
@@ -40,7 +44,9 @@ public class AssignatureDTO {
     public AssignatureDTO(Assignature assignature){
         this.id = assignature.getId().getValue();
         this.name = assignature.getName().getValue();
-        this.studentDTO = assignature.getStudent().stream().map(StudentDTO::new).collect(Collectors.toList());
+        if(assignature.getStudent() != null){
+            this.studentDTO = assignature.getStudent().stream().map(StudentDTO::new).collect(Collectors.toList());
+        }
     }
 
     public Long getId() {

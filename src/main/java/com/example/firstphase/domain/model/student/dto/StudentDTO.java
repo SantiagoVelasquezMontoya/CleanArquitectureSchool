@@ -34,7 +34,9 @@ public class StudentDTO {
         this.phone = student.getPhone().getValue();
         this.email = student.getEmail().getValue();
        //this.assignatureDTO = new AssignatureDTO(new AssignatureDBO(student.getAssignature()));
-        this.assignatureDTO = new AssignatureDTO(student.getAssignature());
+        if(student.getAssignature() != null){
+            this.assignatureDTO = new AssignatureDTO(student.getAssignature());
+        }
     }
 
     public StudentDTO(StudentDBO studentDBO){
@@ -42,6 +44,9 @@ public class StudentDTO {
         this.name = studentDBO.getName();
         this.email = studentDBO.getEmail();
         this.phone = studentDBO.getPhone();
+        if(studentDBO.getAssignatureDBO() != null){
+            this.assignatureDTO = new AssignatureDTO(studentDBO.getAssignatureDBO());
+        }
     }
 
     public static Student toStudent(StudentDTO studentDTO){
@@ -52,7 +57,8 @@ public class StudentDTO {
                 new StudentName(studentDTO.getName()),
                 new StudentPhone(studentDTO.getPhone()),
                 new StudentEmail(studentDTO.getEmail()),
-                AssignatureDTO.toAssignature(studentDTO.assignatureDTO)
+                studentDTO.getAssignatureDTO() != null
+                 ? AssignatureDTO.toAssignature(studentDTO.assignatureDTO) : null
         );
     }
 
