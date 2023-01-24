@@ -1,6 +1,9 @@
 package com.example.firstphase.domain.model.student.dto;
 
+import com.example.firstphase.domain.model.assignature.Assignature;
+import com.example.firstphase.domain.model.assignature.dto.AssignatureDTO;
 import com.example.firstphase.domain.model.student.*;
+import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.student.StudentDBO;
 
 public class StudentDTO {
@@ -13,13 +16,16 @@ public class StudentDTO {
 
     private String email;
 
+    private AssignatureDTO assignatureDTO;
 
 
-    public StudentDTO(Long id, String name, Integer phone, String email) {
+
+    public StudentDTO(Long id, String name, Integer phone, String email, AssignatureDTO assignatureDTO) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.assignatureDTO = assignatureDTO;
     }
 
     public StudentDTO(Student student){
@@ -27,6 +33,8 @@ public class StudentDTO {
         this.name = student.getName().getValue();
         this.phone = student.getPhone().getValue();
         this.email = student.getEmail().getValue();
+       //this.assignatureDTO = new AssignatureDTO(new AssignatureDBO(student.getAssignature()));
+        this.assignatureDTO = new AssignatureDTO(student.getAssignature());
     }
 
     public StudentDTO(StudentDBO studentDBO){
@@ -37,11 +45,14 @@ public class StudentDTO {
     }
 
     public static Student toStudent(StudentDTO studentDTO){
+        AssignatureDTO Assignature = studentDTO.getAssignatureDTO();
+        Assignature myAssignature = AssignatureDTO.toAssignature(Assignature);
         return new Student(
                 new StudentId(studentDTO.getId()),
                 new StudentName(studentDTO.getName()),
                 new StudentPhone(studentDTO.getPhone()),
-                new StudentEmail(studentDTO.getEmail())
+                new StudentEmail(studentDTO.getEmail()),
+                AssignatureDTO.toAssignature(studentDTO.assignatureDTO)
         );
     }
 
@@ -78,5 +89,13 @@ public class StudentDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public AssignatureDTO getAssignatureDTO() {
+        return assignatureDTO;
+    }
+
+    public void setAssignatureDTO(AssignatureDTO assignatureDTO) {
+        this.assignatureDTO = assignatureDTO;
     }
 }

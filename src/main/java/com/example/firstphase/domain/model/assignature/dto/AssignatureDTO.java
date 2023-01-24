@@ -35,6 +35,14 @@ public class AssignatureDTO {
                 );
     }
 
+
+    //Testing Constructor below
+    public AssignatureDTO(Assignature assignature){
+        this.id = assignature.getId().getValue();
+        this.name = assignature.getName().getValue();
+        this.studentDTO = assignature.getStudent().stream().map(StudentDTO::new).collect(Collectors.toList());
+    }
+
     public Long getId() {
         return id;
     }

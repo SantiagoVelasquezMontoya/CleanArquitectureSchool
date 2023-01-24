@@ -1,5 +1,7 @@
 package com.example.firstphase.domain.model.student;
 
+import com.example.firstphase.domain.model.assignature.Assignature;
+
 public class Student {
 
     private final StudentId id;
@@ -7,11 +9,14 @@ public class Student {
     private final StudentPhone phone;
     private final StudentEmail email;
 
-    public Student(StudentId id, StudentName name, StudentPhone phone, StudentEmail email) {
+    private Assignature assignature;
+
+    public Student(StudentId id, StudentName name, StudentPhone phone, StudentEmail email, Assignature assignature) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.assignature  = assignature;
     }
 
     public StudentId getId() {
@@ -28,5 +33,9 @@ public class Student {
 
     public StudentEmail getEmail() {
         return email;
+    }
+
+    public Assignature getAssignature() {
+        return assignature;
     }
 }
