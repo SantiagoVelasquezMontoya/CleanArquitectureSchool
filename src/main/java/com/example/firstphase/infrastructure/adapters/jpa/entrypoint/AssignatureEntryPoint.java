@@ -23,7 +23,7 @@ public class AssignatureEntryPoint {
     @PostMapping
     public ResponseEntity<?> saveAssignature(@RequestBody AssignatureDTO assignatureDTO){
         try{
-            return ResponseEntity.status(HttpStatus.CREATED).body(new AssignatureDTO(assignatureUseCase.saveAssignature(assignatureDTO)));
+            return ResponseEntity.status(HttpStatus.CREATED).body(assignatureUseCase.saveAssignature(assignatureDTO));
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
