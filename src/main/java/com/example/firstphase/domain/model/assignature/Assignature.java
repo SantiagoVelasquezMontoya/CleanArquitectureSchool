@@ -9,13 +9,15 @@ public class Assignature {
     private final AssignatureId id;
     private final AssignatureName name;
 
-    private final List<AssignatureStudent> student;
+    private final List<Student> student;
 
-    public Assignature(AssignatureId id, AssignatureName name, List<AssignatureStudent> student) {
+    public Assignature(AssignatureId id, AssignatureName name, List<Student> student) {
         this.id = id;
         this.name = name;
         this.student = student;
     }
+
+
 
     public AssignatureId getId() {
         return id;
@@ -25,7 +27,7 @@ public class Assignature {
         return name;
     }
 
-    public List<AssignatureStudent> getStudent() {
+    public List<Student> getStudent() {
         return student;
     }
 }

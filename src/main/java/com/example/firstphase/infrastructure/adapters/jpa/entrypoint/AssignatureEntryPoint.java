@@ -3,10 +3,11 @@ package com.example.firstphase.infrastructure.adapters.jpa.entrypoint;
 
 import com.example.firstphase.domain.model.assignature.dto.AssignatureDTO;
 import com.example.firstphase.domain.usecase.assignature.AssignatureUseCase;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -20,7 +21,33 @@ public class AssignatureEntryPoint {
     }
 
     @PostMapping
-    public AssignatureDTO saveAssignature(@RequestBody AssignatureDTO assignatureDTO){
-        return new AssignatureDTO(assignatureUseCase.saveAssignature(assignatureDTO));
+    public ResponseEntity<?> saveAssignature(@RequestBody AssignatureDTO assignatureDTO){
+        try{
+            return ResponseEntity.status(HttpStatus.CREATED).body(assignatureUseCase.saveAssignature(assignatureDTO));
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
+
+    @GetMapping
+    public ResponseEntity<?> getAssignatures(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(assignatureUseCase.getAssignatures());
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAssignature(@PathVariable(name = "id") Integer assignatureId){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(assignatureUseCase.getAssignature(assignatureId));
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+
+
 }
