@@ -17,10 +17,10 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-//    @ExceptionHandler
-//    private ResponseEntity<?> preconditionExceptionHandler(Exception ex){
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-//    }
+    @ExceptionHandler
+    private ResponseEntity<?> preconditionExceptionHandler(IllegalStateException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 
 
 }

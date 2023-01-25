@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/student")
 @AllArgsConstructor
+@CrossOrigin(allowedHeaders = "*" ,origins =  "*")
 public class StudentEntryPoint {
 
     public final StudentUseCase studentUseCase;
