@@ -18,9 +18,9 @@ public class AssignatureUseCase {
         this.assignatureRepository = assignatureRepository;
     }
 
-    public AssignatureDBO saveAssignature(AssignatureDTO assignatureDTO){
+    public AssignatureDTO saveAssignature(AssignatureDTO assignatureDTO){
         AssignatureDBO assignatureDBO = new AssignatureDBO(assignatureRepository.saveAssignature(AssignatureDTO.toAssignature(assignatureDTO)));
-        return assignatureDBO;
+        return new AssignatureDTO(assignatureDBO);
     }
     public List<AssignatureDTO> getAssignatures(){
         return assignatureRepository.getAssignatures().stream().map(AssignatureDTO::new).collect(Collectors.toList());
