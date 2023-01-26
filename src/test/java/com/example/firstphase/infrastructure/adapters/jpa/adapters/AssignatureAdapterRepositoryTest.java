@@ -56,11 +56,14 @@ public class AssignatureAdapterRepositoryTest {
         Integer inputId = 1;
 
         Assignature assignature =
-                new Assignature
-                        (new AssignatureId(1L), new AssignatureName("Python"), new ArrayList<>());
+                new Assignature(
+                        new AssignatureId(1L),
+                        new AssignatureName("Python"),
+                        new ArrayList<>());
 
+        assignatureRepositoryAdapter.saveAssignature(assignature);
         Assignature res =  assignatureRepositoryAdapter.getAssignature(inputId);
-        Assertions.assertEquals("This assignature does not exist", res);
+        Assertions.assertEquals(assignature.getName().getValue(), res.getName().getValue());
     }
 
 

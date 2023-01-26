@@ -93,4 +93,6 @@ public class AssignatureEntryPointTest {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+
+
 }

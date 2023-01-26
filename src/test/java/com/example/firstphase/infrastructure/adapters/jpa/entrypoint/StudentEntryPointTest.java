@@ -87,7 +87,7 @@ public class StudentEntryPointTest {
 
         Mockito
                 .when(studentUseCase
-                        .getStudent(any(Integer.class)))
+                .getStudent(any(Integer.class)))
                 .thenReturn(studentDTO);
 
         //Actions and Assert;
