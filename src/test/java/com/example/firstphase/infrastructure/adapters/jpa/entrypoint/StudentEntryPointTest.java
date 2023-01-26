@@ -61,7 +61,7 @@ public class StudentEntryPointTest {
     }
 
     @Test
-    void getStudentById() throws Exception {
+    void getStudentByIdSuccess() throws Exception {
         Integer inputId = 1;
 
         StudentDTO studentDTO = new StudentDTO(
@@ -77,5 +77,22 @@ public class StudentEntryPointTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/student/" + inputId))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void getStudentByIdError() throws Exception {
+        StudentDTO studentDTO = new StudentDTO(
+                1L, "Santiago", 123, "santiago@email.com",
+                new AssignatureDTO(1L ,"Python"));
+
+        Mockito
+                .when(studentUseCase
+                        .getStudent(any(Integer.class)))
+                .thenReturn(studentDTO);
+
+        //Actions and Assert;
+        mockMvc.perform(MockMvcRequestBuilders.get("/student/"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }
