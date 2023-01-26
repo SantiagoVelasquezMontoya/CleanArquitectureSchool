@@ -22,6 +22,7 @@ import java.util.ArrayList;
 @DataJpaTest
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StudentAdapterRepositoryTest {
 
     @Autowired
@@ -77,7 +78,7 @@ public class StudentAdapterRepositoryTest {
     void findStudentById(){
         //Arrange
         Assignature assignature = new Assignature(
-                new AssignatureId(1L),
+                new AssignatureId(2L),
                 new AssignatureName("Programing"),
                 new ArrayList<>());
 

@@ -4,6 +4,7 @@ import com.example.firstphase.domain.model.gateaways.StudentRepository;
 import com.example.firstphase.domain.model.student.Student;
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
 import com.example.firstphase.infrastructure.adapters.jpa.entity.student.StudentDBO;
+import com.example.firstphase.utilities.ValidationFilter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +12,11 @@ import java.util.stream.Collectors;
 public class StudentUseCase {
 
     private final StudentRepository studentRepository;
+    private final ValidationFilter validationFilter;
 
-
-    public StudentUseCase(StudentRepository studentRepository) {
+    public StudentUseCase(StudentRepository studentRepository, ValidationFilter validationFilter) {
         this.studentRepository = studentRepository;
+        this.validationFilter = validationFilter;
     }
 
     public StudentDTO saveStudent(StudentDTO studentDTO) {
@@ -28,6 +30,7 @@ public class StudentUseCase {
     }
 
     public String enrollStudent(StudentDTO studentDTO){
+
         return studentRepository.enrollStudent(StudentDTO.toStudent(studentDTO));
     }
 

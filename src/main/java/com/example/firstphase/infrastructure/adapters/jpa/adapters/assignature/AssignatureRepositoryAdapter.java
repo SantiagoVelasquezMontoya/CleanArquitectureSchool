@@ -37,8 +37,9 @@ public class AssignatureRepositoryAdapter implements AssignatureRepository {
         Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository.findById(assignatureId);
 
         if(foundAssignature.isEmpty()){
-            throw new NoSuchElementException("This assignature does not exist");
+            throw new IllegalArgumentException("This assignature does not exist");
         }
         return foundAssignature.map(AssignatureDBO::toAssignature).orElse(null);
     }
+
 }

@@ -76,7 +76,7 @@ public class AssignatureEntryPointTest {
     }
 
     @Test
-    @DisplayName("Get Assignature OK")
+    @DisplayName("Get Assignature Error")
     void getAssignatureByIdError() throws Exception {
         //Arrange
         AssignatureDTO assignatureDTO =

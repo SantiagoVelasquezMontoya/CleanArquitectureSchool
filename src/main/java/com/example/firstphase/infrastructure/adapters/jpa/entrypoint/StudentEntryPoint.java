@@ -3,7 +3,9 @@ package com.example.firstphase.infrastructure.adapters.jpa.entrypoint;
 
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
 import com.example.firstphase.domain.usecase.student.StudentUseCase;
+import com.example.firstphase.utilities.ValidationFilter;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ public class StudentEntryPoint {
 
     public final StudentUseCase studentUseCase;
 
+
+
     @PostMapping
     public ResponseEntity<?> saveStudent(@RequestBody StudentDTO studentDTO){
         try{
@@ -32,10 +36,13 @@ public class StudentEntryPoint {
     @PostMapping("/enroll")
     public ResponseEntity<?> enrollStudent (@RequestBody StudentDTO studentDTO){
         try{
-            return ResponseEntity.status(HttpStatus.CREATED).body(studentUseCase.enrollStudent(studentDTO));
-        } catch(Exception e){
-            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentUseCase.enrollStudent(studentDTO));
         }
+        catch (Exception e){
+         return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(e.getMessage());
+        }
+
     }
 
     @GetMapping

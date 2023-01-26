@@ -5,14 +5,19 @@ import com.example.firstphase.domain.model.assignature.dto.AssignatureDTO;
 import com.example.firstphase.domain.usecase.assignature.AssignatureUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.FieldPosition;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
 @RequestMapping("/assignature")
 public class AssignatureEntryPoint {
+
 
     public final AssignatureUseCase assignatureUseCase;
 
@@ -40,11 +45,9 @@ public class AssignatureEntryPoint {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getAssignature(@PathVariable(name = "id") Integer assignatureId){
-        try{
+
             return ResponseEntity.status(HttpStatus.OK).body(assignatureUseCase.getAssignature(assignatureId));
-        } catch(Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+
     }
 
 

@@ -31,7 +31,7 @@ public class AssignatureAdapterRepositoryTest {
                 new AssignatureRepositoryAdapter(repo);
     }
     @Test
-    @Order(1)
+    @Order(2)
     @DisplayName("Save Assignature Success")
     public void saveAssignature(){
 
@@ -50,7 +50,7 @@ public class AssignatureAdapterRepositoryTest {
 
 
     @Test
-    @Order(2)
+    @Order(1)
     @DisplayName("Get Assignature by Id")
     void getAssignature(){
         Integer inputId = 1;

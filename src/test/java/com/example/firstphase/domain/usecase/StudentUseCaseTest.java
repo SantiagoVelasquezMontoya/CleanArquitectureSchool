@@ -48,9 +48,12 @@ public class StudentUseCaseTest {
     @Test
     void getStudentById(){
         Integer inputId = 1;
-        StudentDTO studentDTO = new StudentDTO
-                (1L, "Santiago", 123,  "santiago@gmail.com"
-                        , new AssignatureDTO(1L, "Python", null));
+        StudentDTO studentDTO = new StudentDTO(
+                1L,
+                "Santiago",
+                123,
+                "santiago@gmail.com",
+                new AssignatureDTO(1L, "Python", null));
 
         Student student = StudentDTO.toStudent(studentDTO);
 
