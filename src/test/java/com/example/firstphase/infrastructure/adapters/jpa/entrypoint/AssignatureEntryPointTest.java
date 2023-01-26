@@ -54,9 +54,25 @@ public class AssignatureEntryPointTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
-//    @Test
-//    @DisplayName("save Assignature Error")
-//    void saveAssignatureError(){
-//
-//    }
+
+    @Test
+    @DisplayName("Get Assignature OK")
+    void getAssignatureById() throws Exception {
+        //Arrange
+        Integer inputId = 1;
+
+        AssignatureDTO assignatureDTO =
+                new AssignatureDTO(1L, "Matematicas", new ArrayList<>());
+
+        Mockito
+                .when(assignatureUseCase
+                        .getAssignature(Mockito.any(Integer.class)))
+                            .thenReturn(assignatureDTO);
+
+        //Actions and Assert;
+        mockMvc.perform(MockMvcRequestBuilders.get("/assignature/" + inputId))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 }

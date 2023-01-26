@@ -1,60 +1,82 @@
 package com.example.firstphase.infrastructure.adapters.jpa.adapters;
 
 import com.example.firstphase.domain.model.assignature.Assignature;
+import com.example.firstphase.domain.model.assignature.AssignatureId;
+import com.example.firstphase.domain.model.assignature.AssignatureName;
+import com.example.firstphase.domain.model.student.Student;
 import com.example.firstphase.infrastructure.adapters.jpa.adapters.assignature.AssignatureAdapterRepository;
 import com.example.firstphase.infrastructure.adapters.jpa.adapters.assignature.AssignatureRepositoryAdapter;
-import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.AssignatureDBO;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 
-import static org.springframework.test.util.AssertionErrors.assertTrue;
-
 @DataJpaTest
 @ActiveProfiles("test")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AssignatureAdapterRepositoryTest {
-
-    @MockBean
-    private AssignatureAdapterRepository assignatureAdapterRepository;
     @Autowired
+    private AssignatureAdapterRepository repo;
+
+    @InjectMocks
     private AssignatureRepositoryAdapter assignatureRepositoryAdapter;
 
     @BeforeAll
-     static void init(){
-
-
+      void init(){
+        assignatureRepositoryAdapter =
+                new AssignatureRepositoryAdapter(repo);
     }
     @Test
+    @Order(1)
     @DisplayName("Save Assignature Success")
     public void saveAssignature(){
+
+
         //Arrange
-        AssignatureDBO assignatureDBO = new AssignatureDBO
-                (1L,"Mate", new ArrayList<>());
+        Assignature assignature =
+                new Assignature(new AssignatureId(1L), new AssignatureName("Python"),
+                        new ArrayList<>());
 
-        Assignature assignature = AssignatureDBO
-                .toAssignature(assignatureDBO);
+        //Action
+        Assignature res = assignatureRepositoryAdapter.saveAssignature(assignature);
 
-        Mockito.when(assignatureAdapterRepository.save
-                (Mockito.any(AssignatureDBO.class)))
-            .thenReturn(assignatureDBO);
-
-        //Actions
-        Assignature res = assignatureRepositoryAdapter
-                .saveAssignature(AssignatureDBO.toAssignature(assignatureDBO));
 
         //Assert
-            assertTrue("This does MAtcb",res.getName().getValue()
-                    .equals(assignatureDBO.getName()));
-
-
-
+        Assertions.assertEquals("Python" ,res.getName().getValue());
     }
+
+
+
+    @Test
+    @Order(2)
+    @DisplayName("Get Assignature by Id")
+    void getAssignature(){
+        Integer inputId = 1;
+
+        Assignature assignature =
+                new Assignature
+                        (new AssignatureId(1L), new AssignatureName("Python"), new ArrayList<>());
+
+        Assignature res =  assignatureRepositoryAdapter.getAssignature(inputId);
+        Assertions.assertEquals("This assignature does not exist", res);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
