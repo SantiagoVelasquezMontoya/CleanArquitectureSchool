@@ -57,7 +57,7 @@ public class AssignatureEntryPointTest {
 
     @Test
     @DisplayName("Get Assignature OK")
-    void getAssignatureById() throws Exception {
+    void getAssignatureByIdSuccess() throws Exception {
         //Arrange
         Integer inputId = 1;
 
@@ -75,6 +75,22 @@ public class AssignatureEntryPointTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    @DisplayName("Get Assignature OK")
+    void getAssignatureByIdError() throws Exception {
+        //Arrange
+        AssignatureDTO assignatureDTO =
+                new AssignatureDTO(1L, "Matematicas", new ArrayList<>());
 
+        Mockito
+                .when(assignatureUseCase
+                        .getAssignature(Mockito.any(Integer.class)))
+                .thenReturn(assignatureDTO);
+
+        //Actions and Assert;
+        mockMvc.perform(MockMvcRequestBuilders.get("/assignature/"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 
 }
