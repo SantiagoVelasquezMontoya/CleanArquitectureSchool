@@ -75,4 +75,6 @@ public class AssignatureEntryPointTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+
+
 }
