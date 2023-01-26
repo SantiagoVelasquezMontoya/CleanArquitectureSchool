@@ -43,7 +43,7 @@ public class AssignatureUseCaseTest {
 
     @Test
     @Order(2)
-    void getAssignature(){
+    void getAssignatureById(){
         Integer inputId = 1;
 
         AssignatureDTO assignatureDTO = new AssignatureDTO
