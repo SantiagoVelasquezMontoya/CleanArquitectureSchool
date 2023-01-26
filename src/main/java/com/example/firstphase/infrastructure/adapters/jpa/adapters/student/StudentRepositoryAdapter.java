@@ -55,7 +55,7 @@ public class StudentRepositoryAdapter implements StudentRepository {
 
         }
         studentAdapterRepository.save(new StudentDBO(student));
-        return "The student was saved and enrolled in the assignature successfully.";
+        return "The student was saved.";
 
     }
 
