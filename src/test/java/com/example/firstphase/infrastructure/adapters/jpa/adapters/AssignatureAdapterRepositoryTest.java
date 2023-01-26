@@ -35,7 +35,6 @@ public class AssignatureAdapterRepositoryTest {
     @DisplayName("Save Assignature Success")
     public void saveAssignature(){
 
-
         //Arrange
         Assignature assignature =
                 new Assignature(new AssignatureId(1L), new AssignatureName("Python"),
@@ -43,7 +42,6 @@ public class AssignatureAdapterRepositoryTest {
 
         //Action
         Assignature res = assignatureRepositoryAdapter.saveAssignature(assignature);
-
 
         //Assert
         Assertions.assertEquals("Python" ,res.getName().getValue());

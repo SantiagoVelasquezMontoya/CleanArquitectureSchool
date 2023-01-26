@@ -9,10 +9,7 @@ import com.example.firstphase.infrastructure.adapters.jpa.adapters.assignature.A
 import com.example.firstphase.infrastructure.adapters.jpa.adapters.assignature.AssignatureRepositoryAdapter;
 import com.example.firstphase.infrastructure.adapters.jpa.adapters.student.StudentAdapterRepository;
 import com.example.firstphase.infrastructure.adapters.jpa.adapters.student.StudentRepositoryAdapter;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -51,14 +48,15 @@ public class StudentAdapterRepositoryTest {
 
 
     @Test
+    @DisplayName("Save Student Test OK")
     void saveStudent(){
 
+        //Arrange
         Assignature assignature = new Assignature(
                 new AssignatureId(1L),
-                new AssignatureName("Programacion"),
+                new AssignatureName("Programing"),
                 new ArrayList<>());
 
-        //Arrange
         Student student = new
                 Student(
                 new StudentId(1L),
@@ -72,7 +70,36 @@ public class StudentAdapterRepositoryTest {
 
         //Assert
         Assertions.assertEquals(student.getName().getValue(), res.getName().getValue());
-
     }
+
+    @Test
+    @DisplayName("Find Student By Id OK")
+    void findStudentById(){
+        //Arrange
+        Assignature assignature = new Assignature(
+                new AssignatureId(1L),
+                new AssignatureName("Programing"),
+                new ArrayList<>());
+
+        Student student = new
+                Student(
+                new StudentId(1L),
+                new StudentName("Santiago"),
+                new StudentPhone(123),
+                new StudentEmail("santiago@gmail.com"), assignature);
+
+        Integer studentId = Math.toIntExact(student.getId().getValue());
+
+        //Actions
+        assignatureRepositoryAdapter.saveAssignature(assignature);
+        studentRepositoryAdapter.enrollStudent(student);
+        Student res = studentRepositoryAdapter.getStudent(studentId);
+
+        //Asserts
+        Assertions.assertEquals(student.getName().getValue(), res.getName().getValue());
+    }
+
+
+
 
 }
