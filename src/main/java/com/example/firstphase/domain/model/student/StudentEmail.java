@@ -8,8 +8,8 @@ public class StudentEmail {
 
     public StudentEmail(String value) {
         isTrue(value!= null, "Email cannot be null");
-      //  isTrue(value.matches("^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$"),
-     //           "Not a valid Email");
+        isTrue(value.matches("^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$"),
+                "Not a valid Email");
 
         this.value = value;
     }

@@ -1,4 +1,4 @@
-package com.example.firstphase.utilities;
+package com.example.firstphase.infrastructure.adapters.jpa.utilities;
 
 import org.springframework.http.HttpStatus;
 

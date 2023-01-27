@@ -3,10 +3,7 @@ package com.example.firstphase.infrastructure.adapters.jpa.entrypoint;
 
 import com.example.firstphase.domain.model.student.dto.StudentDTO;
 import com.example.firstphase.domain.usecase.student.StudentUseCase;
-import com.example.firstphase.utilities.ValidationFilter;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

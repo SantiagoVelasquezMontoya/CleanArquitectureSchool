@@ -3,6 +3,7 @@ package com.example.firstphase.infrastructure.adapters.jpa.entrypoint;
 
 import com.example.firstphase.domain.model.assignature.dto.AssignatureDTO;
 import com.example.firstphase.domain.usecase.assignature.AssignatureUseCase;
+import com.example.firstphase.infrastructure.adapters.jpa.utilities.ResponseModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,11 +28,9 @@ public class AssignatureEntryPoint {
 
     @PostMapping
     public ResponseEntity<?> saveAssignature(@RequestBody AssignatureDTO assignatureDTO){
-        try{
+
             return ResponseEntity.status(HttpStatus.CREATED).body(assignatureUseCase.saveAssignature(assignatureDTO));
-        } catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
     }
 
     @GetMapping
@@ -43,9 +42,9 @@ public class AssignatureEntryPoint {
         }
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getAssignature(@PathVariable(name = "id") Integer assignatureId){
-
             return ResponseEntity.status(HttpStatus.OK).body(assignatureUseCase.getAssignature(assignatureId));
 
     }
