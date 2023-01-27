@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/assignature")
+@CrossOrigin(allowedHeaders = "*" ,origins =  "*")
 public class AssignatureEntryPoint {
 
 

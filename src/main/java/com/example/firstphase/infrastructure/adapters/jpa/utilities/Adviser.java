@@ -16,13 +16,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.nio.file.NotDirectoryException;
 
-@Order(Ordered.HIGHEST_PRECEDENCE)
 @EnableWebMvc
-@ControllerAdvice
+@RestControllerAdvice
+@ResponseBody
 public class Adviser extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ResponseModel> handleIllegalArgumentException(IllegalArgumentException ex){
+    public ResponseEntity<ResponseModel> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest web){
 
 
         HttpStatus status = HttpStatus.NOT_FOUND;
