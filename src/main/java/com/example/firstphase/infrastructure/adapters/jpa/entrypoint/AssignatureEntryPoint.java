@@ -3,16 +3,23 @@ package com.example.firstphase.infrastructure.adapters.jpa.entrypoint;
 
 import com.example.firstphase.domain.model.assignature.dto.AssignatureDTO;
 import com.example.firstphase.domain.usecase.assignature.AssignatureUseCase;
+import com.example.firstphase.infrastructure.adapters.jpa.utilities.ResponseModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.FieldPosition;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
 @RequestMapping("/assignature")
+@CrossOrigin(allowedHeaders = "*" ,origins =  "*")
 public class AssignatureEntryPoint {
+
 
     public final AssignatureUseCase assignatureUseCase;
 
@@ -22,11 +29,9 @@ public class AssignatureEntryPoint {
 
     @PostMapping
     public ResponseEntity<?> saveAssignature(@RequestBody AssignatureDTO assignatureDTO){
-        try{
+
             return ResponseEntity.status(HttpStatus.CREATED).body(assignatureUseCase.saveAssignature(assignatureDTO));
-        } catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
     }
 
     @GetMapping
@@ -38,13 +43,11 @@ public class AssignatureEntryPoint {
         }
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getAssignature(@PathVariable(name = "id") Integer assignatureId){
-        try{
             return ResponseEntity.status(HttpStatus.OK).body(assignatureUseCase.getAssignature(assignatureId));
-        } catch(Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+
     }
 
 

@@ -7,6 +7,7 @@ import com.example.firstphase.domain.usecase.assignature.AssignatureUseCase;
 import com.example.firstphase.domain.usecase.student.StudentUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 public class UseCaseBeanConfig {
@@ -20,6 +21,7 @@ public class UseCaseBeanConfig {
     public AssignatureUseCase assignatureUseCase(AssignatureRepository assignatureRepository){
         return new AssignatureUseCase(assignatureRepository);
     }
+
 
 
 }

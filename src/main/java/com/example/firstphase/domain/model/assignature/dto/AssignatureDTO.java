@@ -23,6 +23,15 @@ public class AssignatureDTO {
         this.studentDTO = studentDTO;
     }
 
+    public AssignatureDTO(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
+    public AssignatureDTO() {
+    }
+
     public AssignatureDTO(AssignatureDBO assignatureDBO){
         this.id = assignatureDBO.getId();
         this.name = assignatureDBO.getName();

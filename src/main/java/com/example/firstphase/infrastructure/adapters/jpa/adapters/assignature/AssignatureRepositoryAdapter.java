@@ -7,6 +7,7 @@ import com.example.firstphase.infrastructure.adapters.jpa.entity.assignature.Ass
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,11 @@ public class AssignatureRepositoryAdapter implements AssignatureRepository {
     @Override
     public Assignature getAssignature(Integer assignatureId) {
         Optional<AssignatureDBO> foundAssignature = assignatureAdapterRepository.findById(assignatureId);
+
+        if(foundAssignature.isEmpty()){
+            throw new IllegalArgumentException("This assignature does not exist");
+        }
         return foundAssignature.map(AssignatureDBO::toAssignature).orElse(null);
     }
+
 }

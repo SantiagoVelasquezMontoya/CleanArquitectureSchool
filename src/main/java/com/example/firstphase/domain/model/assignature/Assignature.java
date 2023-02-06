@@ -1,7 +1,6 @@
 package com.example.firstphase.domain.model.assignature;
 
 import com.example.firstphase.domain.model.student.Student;
-import com.example.firstphase.domain.model.student.dto.StudentDTO;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class Assignature {
         this.name = name;
         this.student = student;
     }
-
 
 
     public AssignatureId getId() {
